@@ -1,4 +1,6 @@
 # 🚀 Create TanStack Boilerplate
+<img width="1019" height="431" alt="image" src="https://github.com/user-attachments/assets/203b2b61-1330-4db3-a3fa-009ac44b8e0b" />
+
 
 A fast, production-ready CLI to scaffold [TanStack Start](https://tanstack.com/start/latest) applications (React + Vite + TypeScript + Tailwind). Use this tool to generate opinionated, scalable starters with optional i18n, auth, UI, and testing presets — perfect for teams and projects that need a solid default stack.
 

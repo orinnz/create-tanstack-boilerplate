@@ -75,6 +75,12 @@ const FEATURES = {
     packages: [],
     devPackages: ["@biomejs/biome", "husky", "lint-staged"],
   },
+  deploy: {
+    name: "Cloudflare Deployment",
+    description: "Deploy to Cloudflare Pages using @cloudflare/vite-plugin",
+    packages: ["@cloudflare/vite-plugin"],
+    devPackages: ["wrangler"],
+  },
 };
 
 async function init() {
@@ -311,6 +317,7 @@ function generatePackageJson(name, features, packageManager, stateLibs = ["jotai
       "@types/react": "^19.1.7",
       "@types/react-dom": "^19.1.6",
       "vite-tsconfig-paths": "^5.1.4",
+      "@vitejs/plugin-react": "^5.0.4",
       typescript: "^5.8.3",
     },
   };
@@ -684,10 +691,25 @@ export default {
   // .env.example
   fs.writeFileSync(
     path.join(root, ".env.example"),
-    `# Add your environment variables here
-VITE_API_URL=http://localhost:3000
-`,
+    `VITE_APP_TITLE="My TanStack App"`,
   );
+
+  // wrangler.json (if deploy feature is selected)
+  if (features.includes("deploy")) {
+    fs.writeFileSync(
+      path.join(root, "wrangler.json"),
+      JSON.stringify(
+        {
+          name: projectName, // uses the chosen project name
+          pages_build_output_dir: "dist/client",
+          compatibility_date: "2024-01-01",
+          compatibility_flags: ["nodejs_compat"],
+        },
+        null,
+        2,
+      ),
+    );
+  }
 }
 
 function createReadme(root, projectName, features, packageManager) {
@@ -874,9 +896,11 @@ function getGlobalStyles() {
 }
 
 function getViteConfig(features) {
-  return `import { defineConfig } from 'vite'
+  // Base Vite config with TanStack Start and TypeScript path support
+  const baseConfig = `import { defineConfig } from 'vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+${features.includes('deploy') ? "import cloudflare from '@cloudflare/vite-plugin'" : ''}
 
 export default defineConfig({
   plugins: [
@@ -884,9 +908,27 @@ export default defineConfig({
       projects: ['./tsconfig.json'],
     }),
     tanstackStart(),
+    ${features.includes('deploy') ? 'cloudflare(),' : ''}
   ],
-})
+  ${features.includes('deploy') ? `build: {
+    rollupOptions: {
+      onwarn(warning, warn) {
+        if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+          return;
+        }
+        warn(warning);
+      },
+      onLog(level, log, handler) {
+        if (log.code === 'MODULE_LEVEL_DIRECTIVE') {
+          return;
+        }
+        handler(level, log);
+      },
+    },
+  },` : ''}
+});
 `;
+  return baseConfig;
 }
 
 function getGitignore() {

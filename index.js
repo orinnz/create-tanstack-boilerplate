@@ -700,7 +700,7 @@ export default {
       path.join(root, "wrangler.json"),
       JSON.stringify(
         {
-          name: projectName, // uses the chosen project name
+          name: "my-tanstack-app", // uses the chosen project name
           pages_build_output_dir: "dist/client",
           compatibility_date: "2024-01-01",
           compatibility_flags: ["nodejs_compat"],

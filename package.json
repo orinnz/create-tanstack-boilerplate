@@ -1,6 +1,6 @@
 {
   "name": "create-tanstack-boilerplate",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "The ultimate CLI to scaffold production-ready TanStack Start applications. Features interactive setup for Vite, React 19, TailwindCSS, i18n, Auth, and more. Get started with a scalable full-stack React framework in seconds.",
   "keywords": [
     "tanstack",

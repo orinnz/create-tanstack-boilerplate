@@ -13,7 +13,8 @@ A fast, production-ready CLI to scaffold [TanStack Start](https://tanstack.com/s
 🔐 **Authentication** - Google OAuth ready  
 🎭 **Animations** - Framer Motion support  
 ✅ **Testing** - Vitest + Testing Library setup  
-🎯 **Code Quality** - Biome linter/formatter + Husky + lint-staged  
+🎯 **Code Quality** - Biome linter/formatter + Husky + lint-staged
+☁️ **Cloudflare Deployment** - Adds `@cloudflare/vite-plugin` and automatically creates a `wrangler.json` for easy deployment to Cloudflare Pages.  
 
 ## 📚 Documentation
 

@@ -14,7 +14,7 @@ export function generatePackageJson(name, features, packageManager, stateLibs = 
     dependencies: {
       "@tanstack/react-query": "^5.85.5",
       "@tanstack/react-router": "^1.132.7",
-      "@tanstack/react-router-with-query": "^1.132.7",
+      "@tanstack/react-router-ssr-query": "^1.132.7",
       react: "^19.2.0",
       "react-dom": "^19.2.0",
       vite: "^7.1.3",

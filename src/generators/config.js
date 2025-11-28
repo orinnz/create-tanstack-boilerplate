@@ -89,18 +89,19 @@ export function createConfigFiles(root, features, projectName) {
   // vite.config.ts
   fs.writeFileSync(path.join(root, "vite.config.ts"), getViteConfig(features));
 
-  // tailwind.config.js (if UI is selected)
+  // tailwind.config.ts (if UI is selected)
   if (features.includes("ui")) {
     fs.writeFileSync(
-      path.join(root, "tailwind.config.js"),
-      `/** @type {import('tailwindcss').Config} */
+      path.join(root, "tailwind.config.ts"),
+      `import type { Config } from 'tailwindcss'
+
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+} satisfies Config
 `,
     );
   }

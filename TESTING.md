@@ -164,41 +164,6 @@ en vi
 en
 yes
 EOF
-
-# Test 3: Full features
-echo "\n📦 Test 3: Full features"
-node index.js << EOF
-test-full
-pnpm
-i18n ui state auth animation testing quality
-en vi
-en
-yes
-EOF
-
-echo "\n✅ All tests completed!"
-```
-
-## Automated Testing
-
-### Create test-all.sh
-
-```bash
-#!/bin/bash
-
-set -e
-
-TESTS=(
-  "minimal::"
-  "i18n:i18n:en,vi"
-  "ui:ui:"
-  "full:i18n,ui,state,auth,animation,testing,quality:en,vi"
-)
-
-for test in "${TESTS[@]}"; do
-  IFS=':' read -r name features langs <<< "$test"
-  
-  echo "Testing: $name"
   
   # Create project
   node index.js << EOF

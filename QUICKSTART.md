@@ -72,21 +72,6 @@ See [PUBLISHING.md](PUBLISHING.md) for detailed publishing instructions.
 
 ## Feature Combinations
 
-### Minimal Setup
-- ✅ Core only (TanStack Start + React + TypeScript)
-
-### Full Stack
-- ✅ i18n
-- ✅ UI Components
-- ✅ State Management
-- ✅ Authentication
-- ✅ Animations
-- ✅ Testing
-- ✅ Code Quality
-
-### Recommended for Beginners
-- ✅ UI Components
-- ✅ Code Quality
 
 ### Recommended for Production
 - ✅ i18n

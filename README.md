@@ -10,7 +10,7 @@ A fast, production-ready CLI to scaffold [TanStack Start](https://tanstack.com/s
 🎨 **UI Components** - Optional Radix UI + Tailwind CSS + shadcn/ui integration  
 🌍 **Internationalization** - Multi-language support with Inlang/Paraglide  
 ⚡ **State Management** - Optional Jotai or Zustand  
-🔐 **Authentication** - Google OAuth ready  
+📋 **Form Management** - TanStack Form + Zod/ArkType validation
 🎭 **Animations** - Framer Motion support  
 ✅ **Testing** - Vitest + Testing Library setup  
 🎯 **Code Quality** - Biome linter/formatter + Husky + lint-staged
@@ -51,7 +51,7 @@ The CLI will guide you through:
    - 🌍 Internationalization (i18n)
    - 🎨 UI Components (Radix UI + Tailwind)
    - ⚡ State Management (Jotai)
-   - 🔐 Authentication (Google OAuth)
+   - 📋 Form Management (TanStack Form + Zod/ArkType)
    - 🎭 Animations (Framer Motion)
    - ✅ Testing (Vitest)
    - 🎯 Code Quality (Biome + Husky)
@@ -173,7 +173,7 @@ Built with ❤️ using:
 ## 📊 Stats
 
 - **Package Size**: ~25KB
-- **Dependencies**: 3
+- **Dependencies**: Minimal (prompts, kolorist, changesets)
 - **Node Version**: >=18.0.0
 - **License**: MIT
 

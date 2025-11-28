@@ -1,0 +1,71 @@
+export const FEATURES = {
+  i18n: {
+    name: "Internationalization (i18n)",
+    description: "Multi-language support with Inlang/Paraglide",
+    packages: [],
+    devPackages: ["@inlang/paraglide-js", "@inlang/cli"],
+  },
+  ui: {
+    name: "UI Components",
+    description: "Radix UI + Tailwind CSS + shadcn/ui",
+    packages: [
+      "@radix-ui/react-label",
+      "@radix-ui/react-slot",
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+      "tailwindcss-animate",
+      "lucide-react",
+    ],
+    devPackages: ["@tailwindcss/vite", "tailwindcss", "autoprefixer", "tw-animate-css"],
+  },
+  state: {
+    name: "State Management",
+    description: "Choose Jotai or Zustand for state management",
+    packages: [],
+    devPackages: [],
+  },
+  form: {
+    name: "Form Management",
+    description: "TanStack Form for efficient form state management",
+    packages: ["@tanstack/react-form"],
+    devPackages: [],
+  },
+  validator: {
+    name: "Form Validation",
+    description: "Zod or ArkType for schema validation",
+    packages: [],
+    devPackages: [],
+  },
+  animation: {
+    name: "Animations",
+    description: "Framer Motion for smooth animations",
+    packages: ["framer-motion"],
+    devPackages: [],
+  },
+  testing: {
+    name: "Testing Setup",
+    description: "Vitest + Testing Library",
+    packages: [],
+    devPackages: [
+      "@testing-library/jest-dom",
+      "@testing-library/react",
+      "@testing-library/user-event",
+      "@vitest/ui",
+      "vitest",
+      "jsdom",
+    ],
+  },
+  quality: {
+    name: "Code Quality",
+    description: "Biome (linter/formatter) + Husky + lint-staged",
+    packages: [],
+    devPackages: ["@biomejs/biome", "husky", "lint-staged"],
+  },
+  deploy: {
+    name: "Cloudflare Deployment",
+    description: "Deploy to Cloudflare Pages using @cloudflare/vite-plugin",
+    packages: [],
+    devPackages: ["@cloudflare/vite-plugin", "wrangler"],
+  },
+};

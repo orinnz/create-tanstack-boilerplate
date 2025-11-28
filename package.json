@@ -25,9 +25,11 @@
     "create-tanstack-boilerplate": "./index.js"
   },
   "scripts": {
-    "test": "node index.js"
+    "test": "node index.js",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish"
   },
-
   "author": "Phuoc",
   "license": "MIT",
   "repository": {
@@ -39,11 +41,29 @@
   },
   "homepage": "https://phuocAnonydev14.github.io/create-tanstack-boilerplate#readme",
   "dependencies": {
-    "prompts": "^2.4.2",
+    "kolorist": "^1.8.0",
     "picocolors": "^1.1.1",
-    "kolorist": "^1.8.0"
+    "prompts": "^2.4.2"
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.8",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@tanstack/react-query": "^5.90.11",
+    "@tanstack/react-router": "^1.139.10",
+    "@tanstack/react-start": "^1.139.10",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.555.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwind-merge": "^3.4.0",
+    "vinxi": "^0.5.8",
+    "zod": "^4.1.13"
   }
 }

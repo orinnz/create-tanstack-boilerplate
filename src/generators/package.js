@@ -37,7 +37,12 @@ export function generatePackageJson(name, features, packageManager, stateLibs = 
     const featureConfig = FEATURES[feature];
     if (featureConfig) {
       featureConfig.packages.forEach((p) => {
-        pkg.dependencies[p] = "latest";
+        // Use @inlang/paraglide-js instead of adapter for vite plugin
+        if (p === "@inlang/paraglide-js-adapter-vite") {
+          pkg.devDependencies["@inlang/paraglide-js"] = "latest";
+        } else {
+          pkg.dependencies[p] = "latest";
+        }
       });
       featureConfig.devPackages.forEach((p) => {
         pkg.devDependencies[p] = "latest";

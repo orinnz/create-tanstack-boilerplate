@@ -16,37 +16,78 @@ dist
 
 function getViteConfig(features) {
   const imports = [
+    "import { cloudflare } from '@cloudflare/vite-plugin'",
+    "import { paraglideVitePlugin } from '@inlang/paraglide-js'",
+    "import tailwindcss from '@tailwindcss/vite'",
+    "import { tanstackStart } from '@tanstack/react-start/plugin/vite'",
     "import viteReact from '@vitejs/plugin-react'",
-    "import { TanStackRouterVite } from '@tanstack/router-plugin/vite'",
     "import { defineConfig } from 'vite'",
+    "import viteTsConfigPaths from 'vite-tsconfig-paths'",
   ];
-  const plugins = ["TanStackRouterVite()", "viteReact()"];
+
+  const plugins = [];
+
+  if (features.includes("i18n")) {
+    plugins.push(`paraglideVitePlugin({
+      project: "./project.inlang",
+      outdir: "./src/paraglide",
+      outputStructure: "message-modules",
+      cookieName: "PARAGLIDE_LOCALE",
+      strategy: ["url", "cookie", "preferredLanguage", "baseLocale"],
+      urlPatterns: [
+        {
+          pattern: "/:path(.*)?",
+          localized: [
+            ["vi", "/vi/:path(.*)?"],
+            ["en", "/en/:path(.*)?"],
+          ],
+        },
+      ],
+    })`);
+  }
+
+  plugins.push("viteTsConfigPaths()");
+  plugins.push("tanstackStart()");
+  plugins.push("viteReact()");
 
   if (features.includes("ui")) {
-    imports.push("import tailwindcss from '@tailwindcss/vite'");
     plugins.push("tailwindcss()");
   }
 
   if (features.includes("deploy")) {
-    imports.push("import { cloudflare } from '@cloudflare/vite-plugin'");
-    plugins.push("cloudflare()");
+    plugins.push("cloudflare({ viteEnvironment: { name: 'ssr' } })");
   }
 
-  if (features.includes("i18n")) {
-    imports.push(
-      "import { paraglide } from '@inlang/paraglide-js-adapter-vite'"
-    );
-    plugins.push(
-      "paraglide({ project: './project.inlang', outdir: './src/paraglide' })"
-    );
-  }
+  // Filter out unused imports
+  const usedImports = imports.filter((imp) => {
+    if (imp.includes("cloudflare") && !features.includes("deploy")) return false;
+    if (imp.includes("paraglide") && !features.includes("i18n")) return false;
+    if (imp.includes("tailwindcss") && !features.includes("ui")) return false;
+    return true;
+  });
 
-  return `${imports.join("\n")}
+  return `${usedImports.join("\n")}
 
 export default defineConfig({
   plugins: [
     ${plugins.join(",\n    ")}
   ],
+  build: {
+    rollupOptions: {
+      onwarn(warning, warn) {
+        if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+          return;
+        }
+        warn(warning);
+      },
+      onLog(level, log, handler) {
+        if (log.code === "MODULE_LEVEL_DIRECTIVE") {
+          return;
+        }
+        handler(level, log);
+      },
+    },
+  },
 })
 `;
 }

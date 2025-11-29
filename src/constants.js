@@ -32,7 +32,7 @@ export const FEATURES = {
     devPackages: [],
   },
   validator: {
-    name: "Form Validation",
+    name: "Validation",
     description: "Zod or ArkType for schema validation",
     packages: [],
     devPackages: [],

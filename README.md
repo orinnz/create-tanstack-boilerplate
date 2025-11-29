@@ -4,19 +4,6 @@ A fast, production-ready CLI to scaffold [TanStack Start](https://tanstack.com/s
 
 [![npm version](https://img.shields.io/npm/v/create-tanstack-boilerplate.svg)](https://www.npmjs.com/package/create-tanstack-boilerplate) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Issues](https://img.shields.io/github/issues/phuocAnonydev14/create-tanstack-boilerplate)](https://github.com/phuocAnonydev14/create-tanstack-boilerplate/issues)
 
-## ✨ Features
-
-✨ **Interactive Setup** - Answer a few questions and get a fully configured project  
-🎨 **UI Components** - Optional Radix UI + Tailwind CSS + shadcn/ui integration  
-🌍 **Internationalization** - Multi-language support with Inlang/Paraglide  
-⚡ **State Management** - Optional Jotai or Zustand  
-📋 **Form Management** - TanStack Form + Zod/ArkType validation
-🎭 **Animations** - Framer Motion support  
-✅ **Testing** - Vitest + Testing Library setup  
-🎯 **Code Quality** - Biome linter/formatter + Husky + lint-staged
-☁️ **Cloudflare Deployment** - Adds `@cloudflare/vite-plugin` and automatically creates a `wrangler.json` for easy deployment to Cloudflare Pages.  
-
-## 📚 Documentation
 
 - **[Quick Start Guide](QUICKSTART.md)** - Get started in 2 minutes
 - **[Examples & Patterns](EXAMPLES.md)** - Common use cases and code examples
@@ -51,7 +38,8 @@ The CLI will guide you through:
    - 🌍 Internationalization (i18n)
    - 🎨 UI Components (Radix UI + Tailwind)
    - ⚡ State Management (Jotai)
-   - 📋 Form Management (TanStack Form + Zod/ArkType)
+   - 📋 Form Management (TanStack Form)
+   - 🛡️ Validation (Zod/ArkType)
    - 🎭 Animations (Framer Motion)
    - ✅ Testing (Vitest)
    - 🎯 Code Quality (Biome + Husky)

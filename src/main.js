@@ -224,10 +224,10 @@ export async function init() {
 
   if (features.includes("i18n")) {
     console.log(
-      yellow("📝 Note: Run i18n setup after installing dependencies:"),
+      yellow("📝 Note: run pnpm dev will compile all languages to paraglide files:"),
     );
     console.log(
-      `  ${packageManager} ${packageManager === "npm" ? "run " : ""}machine-translate\n`,
+      `  ${packageManager} ${packageManager === "npm" ? "run " : ""} dev\n`,
     );
   }
 }

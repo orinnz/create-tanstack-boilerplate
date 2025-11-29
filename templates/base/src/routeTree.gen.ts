@@ -4,3 +4,9 @@ export const routeTree = {
   // Placeholder for generated route tree
 // biome-ignore lint/suspicious/noExplicitAny: Placeholder for generated code
 } as any
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    [key: string]: any
+  }
+}

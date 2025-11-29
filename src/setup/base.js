@@ -23,7 +23,7 @@ export function createBaseStructure(root, features) {
         if (entry.name === "server.ts" || entry.name === "router.tsx" || entry.name === "__root.tsx") {
           fs.writeFileSync(destPath, processTemplate(srcPath));
         } else if (entry.name === "routeTree.gen.ts") {
-           // Skip placeholder
+           fs.copyFileSync(srcPath, destPath);
         } else {
           fs.copyFileSync(srcPath, destPath);
         }

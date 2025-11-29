@@ -21,7 +21,7 @@ export function createBaseStructure(root, features) {
       } else {
         // Special handling for files that need processing
         if (entry.name === "server.ts" || entry.name === "router.tsx" || entry.name === "__root.tsx") {
-          fs.writeFileSync(destPath, processTemplate(srcPath));
+          fs.writeFileSync(destPath, processTemplate(srcPath, entry.name));
         } else if (entry.name === "routeTree.gen.ts") {
            fs.copyFileSync(srcPath, destPath);
         } else {
@@ -32,44 +32,47 @@ export function createBaseStructure(root, features) {
   };
 
   // Helper to read and process template
-  const processTemplate = (filePath) => {
+  const processTemplate = (filePath, fileName) => {
     let content = fs.readFileSync(filePath, "utf-8");
 
     if (features.includes("i18n")) {
-      // server.ts
-      content = content.replace(
-        "// {{I18N_IMPORTS}}",
-        `import { paraglideMiddleware } from './paraglide/server'`
-      );
-      content = content.replace(
-        "// {{I18N_FETCH}}",
-        `return paraglideMiddleware(request, ({ request: req }) => handler.fetch(req))`
-      );
-      // router.tsx
-      content = content.replace(
-        "// {{I18N_IMPORTS}}",
-        `import { deLocalizeUrl, localizeUrl } from './paraglide/runtime'`
-      );
-      content = content.replace(
-        "// {{I18N_REWRITE}}",
-        `rewrite: {
+      if (fileName === "server.ts") {
+        content = content.replace(
+          "// {{I18N_IMPORTS}}",
+          `import { paraglideMiddleware } from './paraglide/server'`
+        );
+        content = content.replace(
+          "// {{I18N_FETCH}}",
+          `return paraglideMiddleware(req, ({ request }) => handler.fetch(request))`
+        );
+        // Remove default fetch if i18n is enabled (since we replaced it)
+        content = content.replace("return handler.fetch(req);", "");
+      } else if (fileName === "router.tsx") {
+        content = content.replace(
+          "// {{I18N_IMPORTS}}",
+          `import { deLocalizeUrl, localizeUrl } from './paraglide/runtime'`
+        );
+        content = content.replace(
+          "// {{I18N_REWRITE}}",
+          `rewrite: {
       input: ({ url }) => deLocalizeUrl(url),
       output: ({ url }) => localizeUrl(url),
     },`
-      );
-      // __root.tsx
-      content = content.replace(
-        "// {{I18N_IMPORTS}}",
-        `import { getLocale } from '../paraglide/runtime'`
-      );
-      content = content.replace(
-        "// {{I18N_LOCALE_HOOK}}",
-        `const currentLocale = getLocale()`
-      );
-      content = content.replace(
-        "// {{I18N_LOCALE_PROP}}",
-        `locale={currentLocale}`
-      );
+        );
+      } else if (fileName === "__root.tsx") {
+        content = content.replace(
+          "// {{I18N_IMPORTS}}",
+          `import { getLocale } from '../paraglide/runtime'`
+        );
+        content = content.replace(
+          "// {{I18N_LOCALE_HOOK}}",
+          `const currentLocale = getLocale()`
+        );
+        content = content.replace(
+          "// {{I18N_LOCALE_PROP}}",
+          `locale={currentLocale}`
+        );
+      }
     } else {
       // Remove placeholders if feature not enabled
       content = content.replace("// {{I18N_IMPORTS}}", "");

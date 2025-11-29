@@ -67,27 +67,6 @@ Next steps:
   pnpm dev
 ```
 
-## 📁 Project Structure
-
-```
-my-app/
-├── src/
-│   ├── routes/              # TanStack Router routes
-│   ├── components/          # React components
-│   ├── lib/                 # Utility libraries
-│   ├── styles/              # Global styles
-│   └── ...
-├── messages/                # i18n translations (if selected)
-├── tests/                   # Test files (if selected)
-└── ...
-```
-
-### Optional Features
-
-See [EXAMPLES.md](EXAMPLES.md) for detailed feature descriptions and usage examples.
-
-## 🧪 Development
-
 ### Local Testing
 
 ```bash
